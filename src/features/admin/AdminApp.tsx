@@ -8,6 +8,7 @@ import { AlbumManager } from "./pages/AlbumManager";
 import { ProjectManager } from "./pages/ProjectManager";
 import { TestimonialManager } from "./pages/TestimonialManager";
 import { MediaManager } from "./pages/MediaManager";
+import { ProfilePage } from "./pages/ProfilePage";
 
 function RequireAuth({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
@@ -37,6 +38,7 @@ export function AdminApp() {
           <Route path="albums" element={<AlbumManager />} />
           <Route path="testimonials" element={<TestimonialManager />} />
           <Route path="media" element={<MediaManager />} />
+          <Route path="profile" element={<ProfilePage />} />
         </Route>
         <Route path="*" element={<Navigate to="/admin" replace />} />
       </Routes>

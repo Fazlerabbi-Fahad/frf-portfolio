@@ -33,10 +33,13 @@ export type Testimonial = {
   order: number;
 };
 
+export type SiteAuthor = { name: string; avatar: string; bio: string };
+
 export function useProjects(featuredOnly = false) {
   return useQuery({
     queryKey: ["projects", { featuredOnly }],
-    queryFn: () => api.get<Project[]>(`/projects${featuredOnly ? "?featured=1" : ""}`),
+    queryFn: () =>
+      api.get<Project[]>(`/projects${featuredOnly ? "?featured=1" : ""}`),
   });
 }
 
@@ -52,5 +55,12 @@ export function useTestimonials() {
   return useQuery({
     queryKey: ["testimonials"],
     queryFn: () => api.get<Testimonial[]>("/testimonials"),
+  });
+}
+
+export function useSiteAuthor() {
+  return useQuery({
+    queryKey: ["site-author"],
+    queryFn: () => api.get<SiteAuthor>("/site-author"),
   });
 }

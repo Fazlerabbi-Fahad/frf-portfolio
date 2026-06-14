@@ -9,6 +9,7 @@ const navItems = [
   { to: "/admin/albums", label: "Gallery" },
   { to: "/admin/testimonials", label: "Testimonials" },
   { to: "/admin/media", label: "Media" },
+  { to: "/admin/profile", label: "Profile" },
 ];
 
 export function AdminLayout() {

@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { api } from "@/lib/api";
 import { Section, Eyebrow } from "@/components/ui/Primitives";
 import { Reveal } from "@/components/motion/Reveal";
+import { useSiteAuthor } from "@/lib/queries";
 
 type Photo = { _id: string; url: string; caption: string };
 type Album = {
@@ -19,6 +20,7 @@ export function GalleryDetailPage() {
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [err, setErr] = useState("");
   const [active, setActive] = useState<number | null>(null);
+  const { data: author } = useSiteAuthor();
 
   useEffect(() => {
     api
@@ -32,12 +34,15 @@ export function GalleryDetailPage() {
 
   const close = useCallback(() => setActive(null), []);
   const prev = useCallback(
-    () => setActive((i) => (i === null ? null : (i - 1 + photos.length) % photos.length)),
-    [photos.length]
+    () =>
+      setActive((i) =>
+        i === null ? null : (i - 1 + photos.length) % photos.length,
+      ),
+    [photos.length],
   );
   const next = useCallback(
     () => setActive((i) => (i === null ? null : (i + 1) % photos.length)),
-    [photos.length]
+    [photos.length],
   );
 
   useEffect(() => {
@@ -55,20 +60,30 @@ export function GalleryDetailPage() {
     return (
       <Section className="mt-24 min-h-[60vh]">
         <p className="text-lg text-ash">Couldn't load this album.</p>
-        <Link to="/gallery" className="mt-6 inline-block text-sm text-bone/70 hover:text-bone">
+        <Link
+          to="/gallery"
+          className="mt-6 inline-block text-sm text-bone/70 hover:text-bone"
+        >
           ← All albums
         </Link>
       </Section>
     );
   }
   if (!album) {
-    return <Section className="mt-24 min-h-[60vh]"><p className="text-sm text-ash">Loading…</p></Section>;
+    return (
+      <Section className="mt-24 min-h-[60vh]">
+        <p className="text-sm text-ash">Loading…</p>
+      </Section>
+    );
   }
 
   return (
     <Section className="mt-20 min-h-[70vh]">
       <Reveal>
-        <Link to="/gallery" className="text-sm text-ash transition-colors hover:text-bone">
+        <Link
+          to="/gallery"
+          className="text-sm text-ash transition-colors hover:text-bone"
+        >
           ← All albums
         </Link>
       </Reveal>
@@ -76,17 +91,39 @@ export function GalleryDetailPage() {
         <Eyebrow tone="ember">{album.location || "Field note"}</Eyebrow>
       </Reveal>
       <Reveal delay={0.08}>
-        <h1 className="mt-5 text-[clamp(36px,6vw,72px)] font-semibold tracking-tight">{album.name}</h1>
+        <h1 className="mt-5 text-[clamp(36px,6vw,72px)] font-semibold tracking-tight">
+          {album.name}
+        </h1>
       </Reveal>
       {album.story && (
         <Reveal delay={0.1}>
-          <p className="mt-6 max-w-[60ch] text-lg leading-relaxed text-ash">{album.story}</p>
+          <p className="mt-6 max-w-[60ch] text-lg leading-relaxed text-ash">
+            {album.story}
+          </p>
+          {author && (
+            <div className="mt-... flex items-center gap-3">
+              {author.avatar && (
+                <img
+                  src={author.avatar}
+                  alt={author.name}
+                  className="h-11 w-11 rounded-full object-cover ring-1 ring-white/10"
+                />
+              )}
+              <div>
+                <p className="text-sm ...">Photographed by {author.name}</p>
+                {author.bio && <p className="...">{author.bio}</p>}
+              </div>
+            </div>
+          )}
         </Reveal>
       )}
       {album.travelDate && (
         <Reveal delay={0.12}>
           <p className="mt-3 font-mono text-xs text-ash">
-            {new Date(album.travelDate).toLocaleDateString(undefined, { year: "numeric", month: "long" })}
+            {new Date(album.travelDate).toLocaleDateString(undefined, {
+              year: "numeric",
+              month: "long",
+            })}
           </p>
         </Reveal>
       )}
@@ -108,7 +145,9 @@ export function GalleryDetailPage() {
           </button>
         ))}
       </div>
-      {!photos.length && <p className="mt-10 text-sm text-ash">No photos in this album yet.</p>}
+      {!photos.length && (
+        <p className="mt-10 text-sm text-ash">No photos in this album yet.</p>
+      )}
 
       {/* lightbox */}
       <AnimatePresence>
@@ -120,7 +159,10 @@ export function GalleryDetailPage() {
             exit={{ opacity: 0 }}
             onClick={close}
           >
-            <button className="absolute right-5 top-5 text-2xl text-bone/70 hover:text-bone" onClick={close}>
+            <button
+              className="absolute right-5 top-5 text-2xl text-bone/70 hover:text-bone"
+              onClick={close}
+            >
               ✕
             </button>
             <button
