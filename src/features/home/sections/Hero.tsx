@@ -41,12 +41,12 @@ export function Hero() {
         transition={{ delay: 0.6, duration: 0.8 }}
       >
         Scalable web applications with{" "}
-        <span className="font-medium text-bone">React, TypeScript, Node & MongoDB</span> — engineered to
+        <span className="font-medium text-bone">Multi-stack</span> — engineered to
         solve real problems, not just demos. Off the clock, I document the places I travel.
       </motion.p>
 
       <motion.div
-        className="mt-11 flex flex-wrap items-center gap-4"
+        className="mt-11 mb-2 flex flex-wrap items-center gap-4"
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.75, duration: 0.8 }}

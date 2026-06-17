@@ -28,7 +28,7 @@ const process = [
   { n: "04", t: "Harden and hand off", d: "Tests, docs, deploy. Work isn't done until someone else can run it." },
 ];
 
-const interests = ["Anime & learning Japanese", "Travel & photography", "Print-on-demand entrepreneurship", "Building communities"];
+const interests = ["Anime", "Travel & photography", "Learner"];
 
 export function AboutPage() {
   return (

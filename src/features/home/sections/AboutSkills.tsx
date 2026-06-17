@@ -10,7 +10,7 @@ export function About() {
       </Reveal>
       <Reveal delay={0.05}>
         <p className="mt-7 max-w-[20ch] text-[clamp(28px,4.5vw,52px)] font-semibold leading-[1.05] tracking-tight">
-          Six years turning <span className="text-cyan">requirements</span> into things that run.
+          Two years turning <span className="text-cyan">requirements</span> into things that run.
         </p>
       </Reveal>
       <Reveal delay={0.1}>

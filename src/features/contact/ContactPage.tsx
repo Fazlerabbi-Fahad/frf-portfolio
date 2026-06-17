@@ -125,10 +125,19 @@ export function ContactPage() {
               <p className="font-mono text-[11px] uppercase tracking-wider text-ash">Direct</p>
               <div className="mt-3 space-y-2">
                 <a href="https://github.com/Fazlerabbi-Fahad" className="block text-bone/85 hover:text-bone">
-                  github.com/Fazlerabbi-Fahad
+                  GitHub
                 </a>
-                <a href="https://www.linkedin.com" className="block text-bone/85 hover:text-bone">
+                <a href="https://www.linkedin.com/in/fazle-rabbi-fahad/" className="block text-bone/85 hover:text-bone">
                   LinkedIn
+                </a>
+                <a href="https://www.facebook.com/fablerabbi.fahad" className="block text-bone/85 hover:text-bone">
+                  Facebook
+                </a>
+                <a href="https://www.instagram.com/fazlerabbi_fahad/" className="block text-bone/85 hover:text-bone">
+                  Instagram
+                </a>
+                <a href="https://api.whatsapp.com/send/?phone=8801729992254" className="block text-bone/85 hover:text-bone">
+                  Whatsapp
                 </a>
               </div>
             </div>

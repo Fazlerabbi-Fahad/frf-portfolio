@@ -164,12 +164,6 @@ export const timeline: TimelineItem[] = [
     detail: "Full-stack delivery across enterprise web applications.",
   },
   {
-    period: "Building",
-    role: "Founder",
-    org: "Qismah Tees",
-    detail: "A print-on-demand brand serving US buyers across dog-breed and disc-golf niches.",
-  },
-  {
     period: "Foundation",
     role: "BSc, Computer Science",
     org: "AIUB",
@@ -186,7 +180,7 @@ export const skillGroups = [
 
 export const clientFocus = [
   "Remote-first startups",
-  "Agencies needing senior full-stack delivery",
+  "Agencies needing full-stack delivery",
   "Founders shipping their first product",
   "Teams modernizing legacy enterprise apps",
 ];

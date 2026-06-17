@@ -7,7 +7,7 @@ export function Footer() {
             Fazle Rabbi Fahad<span className="text-electric">.</span>
           </p>
           <p className="mt-2 max-w-xs text-sm text-ash">
-            Full-stack engineer. <span className="text-cyan">Systems</span> by day,{" "}
+            Software engineer. <span className="text-cyan">Systems</span> by day,{" "}
             <span className="text-ember">stories</span> on the road.
           </p>
         </div>
@@ -16,7 +16,7 @@ export function Footer() {
             <a href="https://github.com/Fazlerabbi-Fahad" className="transition-colors hover:text-bone">
               GitHub
             </a>
-            <a href="https://www.linkedin.com" className="transition-colors hover:text-bone">
+            <a href="https://www.linkedin.com/in/fazle-rabbi-fahad/" className="transition-colors hover:text-bone">
               LinkedIn
             </a>
           </div>
