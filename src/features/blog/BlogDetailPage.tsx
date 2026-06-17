@@ -9,6 +9,7 @@ import { api } from "@/lib/api";
 import { Section } from "@/components/ui/Primitives";
 import { Reveal } from "@/components/motion/Reveal";
 import { Seo, BASE_URL } from "@/components/seo/Seo";
+import { trackEvent } from "@/lib/track";
 
 type Blog = {
   title: string;
@@ -50,6 +51,7 @@ export function BlogDetailPage() {
   }, [blog?.content]);
 
   const share = (network: "twitter" | "linkedin") => {
+    trackEvent("share", slug ?? "", network);
     const url = encodeURIComponent(window.location.href);
     const text = encodeURIComponent(blog?.title ?? "");
     const target =

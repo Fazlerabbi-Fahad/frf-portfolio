@@ -64,3 +64,15 @@ export function useSiteAuthor() {
     queryFn: () => api.get<SiteAuthor>("/site-author"),
   });
 }
+export type EventStats = {
+  total: Record<string, number>;
+  last30: Record<string, number>;
+  topTargets: { _id: string; count: number }[];
+};
+
+export function useEventStats() {
+  return useQuery({
+    queryKey: ["event-stats"],
+    queryFn: () => api.get<EventStats>("/events/stats", true),
+  });
+}
