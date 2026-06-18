@@ -9,14 +9,20 @@ import { ProjectManager } from "./pages/ProjectManager";
 import { TestimonialManager } from "./pages/TestimonialManager";
 import { MediaManager } from "./pages/MediaManager";
 import { ProfilePage } from "./pages/ProfilePage";
+import { SettingsManager } from "./pages/SettingsManager";
 
 function RequireAuth({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
   const location = useLocation();
   if (loading) {
-    return <div className="py-32 text-center font-mono text-sm text-ash">Loading…</div>;
+    return (
+      <div className="py-32 text-center font-mono text-sm text-ash">
+        Loading…
+      </div>
+    );
   }
-  if (!user) return <Navigate to="/admin/login" state={{ from: location }} replace />;
+  if (!user)
+    return <Navigate to="/admin/login" state={{ from: location }} replace />;
   return <>{children}</>;
 }
 
@@ -39,6 +45,7 @@ export function AdminApp() {
           <Route path="testimonials" element={<TestimonialManager />} />
           <Route path="media" element={<MediaManager />} />
           <Route path="profile" element={<ProfilePage />} />
+          <Route path="settings" element={<SettingsManager />} />
         </Route>
         <Route path="*" element={<Navigate to="/admin" replace />} />
       </Routes>

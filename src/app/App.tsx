@@ -6,6 +6,7 @@ import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { HomePage } from "@/features/home/HomePage";
 import { usePageTracking } from "@/lib/usePageTracking";
+import { BackToTop } from "@/components/layout/BackToTop";
 // lazy-load non-home routes so heavy deps (markdown, syntax highlighter) split out
 const ProjectsPage = lazy(() =>
   import("@/features/projects/ProjectsPage").then((m) => ({
@@ -165,6 +166,8 @@ function PublicSite() {
         </AnimatePresence>
       </Suspense>
       <Footer />
+      <BackToTop />
+
     </div>
   );
 }

@@ -10,6 +10,7 @@ const navItems = [
   { to: "/admin/testimonials", label: "Testimonials" },
   { to: "/admin/media", label: "Media" },
   { to: "/admin/profile", label: "Profile" },
+  { to: "/admin/settings", label: "Settings" },
 ];
 
 export function AdminLayout() {

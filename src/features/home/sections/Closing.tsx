@@ -3,6 +3,8 @@ import { Section, Eyebrow } from "@/components/ui/Primitives";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/Reveal";
 import { blogTeasers, travelTeasers } from "@/data/content";
 import { useTestimonials } from "@/lib/queries";
+import { useQuery } from "@tanstack/react-query";
+import { api } from "@/lib/api";
 
 export function Testimonials() {
   const { data: testimonials } = useTestimonials();
@@ -23,12 +25,24 @@ export function Testimonials() {
                     <span key={i}>★</span>
                   ))}
                 </div>
-                <p className="mt-4 text-lg leading-relaxed text-bone/85">"{t.quote}"</p>
+                <p className="mt-4 text-lg leading-relaxed text-bone/85">
+                  "{t.quote}"
+                </p>
                 <div className="mt-5 flex items-center gap-3">
-                  {t.avatar && <img src={t.avatar} alt="" className="h-9 w-9 rounded-full object-cover" />}
+                  {t.avatar && (
+                    <img
+                      src={t.avatar}
+                      alt=""
+                      className="h-9 w-9 rounded-full object-cover"
+                    />
+                  )}
                   <div>
                     <p className="text-sm font-medium">{t.author}</p>
-                    {t.title && <p className="font-mono text-[11px] text-ash">{t.title}</p>}
+                    {t.title && (
+                      <p className="font-mono text-[11px] text-ash">
+                        {t.title}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -41,7 +55,9 @@ export function Testimonials() {
             <p className="mx-auto max-w-[44ch] text-xl font-medium leading-relaxed text-bone/80">
               "Reserved for the words of people I've shipped with."
             </p>
-            <p className="mt-4 font-mono text-xs text-ash">Freelancer.com — 5.0 rating · 100% completion</p>
+            <p className="mt-4 font-mono text-xs text-ash">
+              Freelancer.com — 5.0 rating · 100% completion
+            </p>
           </div>
         </Reveal>
       )}
@@ -50,23 +66,49 @@ export function Testimonials() {
 }
 
 export function LatestBlogs() {
+  const { data } = useQuery({
+    queryKey: ["latest-blogs"],
+    queryFn: () =>
+      api.get<{
+        items: {
+          _id: string;
+          title: string;
+          slug: string;
+          readingMinutes: number;
+          category?: { name: string };
+        }[];
+      }>("/blogs?limit=3"),
+  });
+  const latest = data?.items ?? [];
   return (
     <Section id="writing" className="mt-40">
       <Reveal>
         <div className="flex items-end justify-between">
           <Eyebrow>Latest writing</Eyebrow>
-          <Link to="/blog" className="font-mono text-xs text-ash transition-colors hover:text-bone">
+          <Link
+            to="/blog"
+            className="font-mono text-xs text-ash transition-colors hover:text-bone"
+          >
             All posts →
           </Link>
         </div>
       </Reveal>
       <Stagger className="mt-9 grid gap-px overflow-hidden rounded-2xl border border-white/8 sm:grid-cols-3">
-        {blogTeasers.map((b) => (
-          <StaggerItem key={b.title}>
-            <Link to="/blog" className="block h-full bg-raised/50 p-7 transition-colors hover:bg-raised">
-              <span className="font-mono text-[11px] text-cyan">{b.cat}</span>
-              <h3 className="mt-3 text-lg font-medium leading-snug">{b.title}</h3>
-              <span className="mt-6 block font-mono text-[11px] text-ash">{b.read} read</span>
+        {latest.map((b) => (
+          <StaggerItem key={b._id}>
+            <Link
+              to={`/blog/${b.slug}`}
+              className="block h-full bg-raised/50 p-7 transition-colors hover:bg-raised"
+            >
+              <span className="font-mono text-[11px] text-cyan">
+                {b.category?.name ?? "Writing"}
+              </span>
+              <h3 className="mt-3 text-lg font-medium leading-snug">
+                {b.title}
+              </h3>
+              <span className="mt-6 block font-mono text-[11px] text-ash">
+                {b.readingMinutes} min read
+              </span>
             </Link>
           </StaggerItem>
         ))}
@@ -76,12 +118,29 @@ export function LatestBlogs() {
 }
 
 export function TravelPreview() {
+  const { data: albums } = useQuery({
+    queryKey: ["latest-albums"],
+    queryFn: () =>
+      api.get<
+        {
+          _id: string;
+          name: string;
+          slug: string;
+          location: string;
+          coverImage: string;
+        }[]
+      >("/albums"),
+  });
+  const latestAlbums = (albums ?? []).slice(0, 3);
   return (
     <Section id="field-notes" className="mt-40">
       <Reveal>
         <div className="flex items-end justify-between">
           <Eyebrow tone="ember">Field notes</Eyebrow>
-          <Link to="/gallery" className="font-mono text-xs text-ash transition-colors hover:text-bone">
+          <Link
+            to="/gallery"
+            className="font-mono text-xs text-ash transition-colors hover:text-bone"
+          >
             Open the gallery →
           </Link>
         </div>
@@ -92,17 +151,36 @@ export function TravelPreview() {
         </p>
       </Reveal>
       <Stagger className="mt-9 grid gap-5 md:grid-cols-3">
-        {travelTeasers.map((t) => (
-          <StaggerItem key={t.album}>
+        {latestAlbums.map((t:any) => (
+          <StaggerItem key={t._id}>
             <Link
-              to="/gallery"
+              to={`/gallery/${t.slug}`}
               className="group block aspect-[4/5] overflow-hidden rounded-2xl border border-white/8"
             >
-              <div className="relative flex h-full flex-col justify-end p-6 transition-transform duration-500 group-hover:scale-[1.02]"
-                   style={{ background: "linear-gradient(180deg,#12141B,rgba(255,120,73,0.12))" }}>
-                <span className="font-mono text-[11px] text-ember">{t.coords}</span>
-                <h3 className="mt-2 text-2xl font-semibold">{t.album}</h3>
-                <p className="mt-1 text-sm text-ash">{t.tone}</p>
+              <div
+                className="relative flex h-full flex-col justify-end p-6 transition-transform duration-500 group-hover:scale-[1.02]"
+                style={
+                  t.coverImage
+                    ? {
+                        backgroundImage: `url(${t.coverImage})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                      }
+                    : {
+                        background:
+                          "linear-gradient(180deg,#12141B,rgba(255,120,73,0.12))",
+                      }
+                }
+              >
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/30 to-transparent" />
+                <div className="relative">
+                  <span className="font-mono text-[11px] text-ember">
+                    {t.location}
+                  </span>
+                  <h3 className="mt-2 text-2xl font-semibold">
+                    {t.album ?? t.name}
+                  </h3>
+                </div>
               </div>
             </Link>
           </StaggerItem>
@@ -126,8 +204,8 @@ export function ContactCTA() {
               Have something worth <span className="grad-temp">building</span>?
             </h2>
             <p className="mt-6 max-w-[48ch] text-lg text-ash">
-              Open to remote roles, freelance projects, and agency work. Tell me what you're trying to
-              ship.
+              Open to remote roles, freelance projects, and agency work. Tell me
+              what you're trying to ship.
             </p>
             <Link
               to="/contact"

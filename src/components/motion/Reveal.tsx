@@ -25,7 +25,7 @@ export function Reveal({
       variants={reveal}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, margin: "0px" }}
       transition={{ delay }}
     >
       {children}
@@ -51,7 +51,7 @@ export function Stagger({
       variants={stagger}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, margin: "0px" }}
     >
       {children}
     </motion.div>

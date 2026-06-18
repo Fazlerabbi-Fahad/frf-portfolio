@@ -35,6 +35,8 @@ export type Testimonial = {
 
 export type SiteAuthor = { name: string; avatar: string; bio: string };
 
+export type HeroStat = { label: string; value: string; unit: string; tone: "cyan" | "ember" };
+
 export function useProjects(featuredOnly = false) {
   return useQuery({
     queryKey: ["projects", { featuredOnly }],
@@ -74,5 +76,13 @@ export function useEventStats() {
   return useQuery({
     queryKey: ["event-stats"],
     queryFn: () => api.get<EventStats>("/events/stats", true),
+  });
+}
+
+
+export function useSettings() {
+  return useQuery({
+    queryKey: ["settings"],
+    queryFn: () => api.get<{ heroStats: HeroStat[] }>("/settings"),
   });
 }

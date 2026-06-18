@@ -49,7 +49,7 @@ export function GalleryPage() {
       {err && <p className="mt-8 text-sm text-ember">Couldn't load albums: {err}</p>}
       {loading && <p className="mt-8 text-sm text-ash">Loading…</p>}
 
-      <Stagger className="mt-12 grid gap-5 md:grid-cols-2">
+      <Reveal className="mt-12 grid gap-5 md:grid-cols-2">
         {albums.map((a) => (
           <StaggerItem key={a._id}>
             <Link to={`/gallery/${a.slug}`} className="group block">
@@ -73,7 +73,7 @@ export function GalleryPage() {
             </Link>
           </StaggerItem>
         ))}
-      </Stagger>
+      </Reveal>
 
       {!loading && !albums.length && !err && (
         <p className="mt-10 text-sm text-ash">No albums yet.</p>
