@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { Section, Eyebrow } from "@/components/ui/Primitives";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/Reveal";
-import { blogTeasers, travelTeasers } from "@/data/content";
 import { useTestimonials } from "@/lib/queries";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@/lib/api";

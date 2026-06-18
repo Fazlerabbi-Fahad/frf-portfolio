@@ -184,15 +184,3 @@ export const clientFocus = [
   "Founders shipping their first product",
   "Teams modernizing legacy enterprise apps",
 ];
-
-export const blogTeasers = [
-  { title: "Breaking the build-but-never-ship loop", cat: "Engineering", read: "6 min" },
-  { title: "Clean Architecture, honestly: when it helps", cat: "Architecture", read: "9 min" },
-  { title: "What an OCR pipeline taught me about patience", cat: "Notes", read: "5 min" },
-];
-
-export const travelTeasers = [
-  { album: "Bandarban", coords: "22.19°N, 92.21°E", tone: "Hills and low cloud." },
-  { album: "Sajek Valley", coords: "23.38°N, 92.29°E", tone: "Above the clouds." },
-  { album: "Cox's Bazar", coords: "21.43°N, 91.97°E", tone: "The longest beach." },
-];

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { api } from "@/lib/api";
 import { Section, Eyebrow } from "@/components/ui/Primitives";
-import { Reveal, Stagger, StaggerItem } from "@/components/motion/Reveal";
+import { Reveal, StaggerItem } from "@/components/motion/Reveal";
 import { Seo } from "@/components/seo/Seo";
 
 type Album = {

@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 import { api } from "@/lib/api";
-import { useAuth } from "../AuthContext";
 import { uploadToCloudinary, cloudinaryConfigured } from "@/lib/cloudinary";
 import { Field, Input, Textarea, Button, Panel } from "../components/AdminUI";
 
 type Profile = { name: string; avatar: string; bio: string };
 
 export function ProfilePage() {
-  const { user } = useAuth();
   const [form, setForm] = useState<Profile>({ name: "", avatar: "", bio: "" });
   const [uploading, setUploading] = useState(false);
   const [saved, setSaved] = useState(false);
