@@ -28,7 +28,7 @@ export function ProjectsPage() {
       {error && <p className="mt-10 text-sm text-ember">Couldn't load projects.</p>}
       {isLoading && <p className="mt-10 text-sm text-ash">Loading…</p>}
 
-      <Stagger className="mt-14 grid gap-5 md:grid-cols-2">
+      <div className="mt-14 grid gap-5 md:grid-cols-2">
         {projects?.map((p) => (
           <StaggerItem key={p._id}>
             <Link to={`/projects/${p.slug}`} className="group block h-full">
@@ -62,7 +62,7 @@ export function ProjectsPage() {
             </Link>
           </StaggerItem>
         ))}
-      </Stagger>
+      </div>
 
       {!isLoading && !projects?.length && !error && (
         <p className="mt-10 text-sm text-ash">No projects yet.</p>

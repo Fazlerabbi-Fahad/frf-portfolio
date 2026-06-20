@@ -52,13 +52,13 @@ export function BlogDetailPage() {
 
   const share = (network: "twitter" | "linkedin") => {
     trackEvent("share", slug ?? "", network);
-    const url = encodeURIComponent(window.location.href);
-    const text = encodeURIComponent(blog?.title ?? "");
-    const target =
-      network === "twitter"
-        ? `https://twitter.com/intent/tweet?url=${url}&text=${text}`
-        : `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
-    window.open(target, "_blank", "noopener,width=600,height=600");
+    // const url = encodeURIComponent(window.location.href);
+    // const text = encodeURIComponent(blog?.title ?? "");
+    // const target =
+    //   network === "twitter"
+    //     ? `https://twitter.com/intent/tweet?url=${url}&text=${text}`
+    //     : `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+    // window.open(target, "_blank", "noopener,width=600,height=600");
   };
 
   if (error) {
@@ -255,7 +255,7 @@ export function BlogDetailPage() {
         )}
       </div>
 
-      <Reveal>
+      {/* <Reveal>
         <div className="mt-14 flex items-center gap-3 border-t border-white/8 pt-8">
           <span className="font-mono text-xs text-ash">Share:</span>
           <button
@@ -271,7 +271,7 @@ export function BlogDetailPage() {
             LinkedIn
           </button>
         </div>
-      </Reveal>
+      </Reveal> */}
     </Section>
   );
 }
