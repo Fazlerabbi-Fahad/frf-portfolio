@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Section, Eyebrow } from "@/components/ui/Primitives";
-import { Reveal, Stagger, StaggerItem } from "@/components/motion/Reveal";
+import { Reveal, StaggerItem } from "@/components/motion/Reveal";
 import { Seo, personJsonLd } from "@/components/seo/Seo";
 import { useProjects } from "@/lib/queries";
 
